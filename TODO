@@ -3,5 +3,5 @@
 - [] create HTML for the SurveyTask component
 - [x] create own flow that takes a while to expires....
 - [] on accept, do an outbound call.
-- [] show the journey name in the task header (e.g. "new car policy"), so agent knows before accepting the task what is this survey about.
+- [x] show the journey name in the task header (e.g. "new car policy"), so agent knows before accepting the task what is this survey about.
 - [] create a lovely readme

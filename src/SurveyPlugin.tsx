@@ -49,6 +49,8 @@ export default class SurveyPlugin extends FlexPlugin {
     newChannel.icons!.list = icon;
     newChannel.icons!.main = icon;
 
+    newChannel.templates!.TaskListItem!.secondLine = (task) => task.attributes.journey;
+
     flex.TaskChannels.register(newChannel);
   }
 }
