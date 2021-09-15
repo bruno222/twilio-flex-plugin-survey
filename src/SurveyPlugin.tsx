@@ -19,13 +19,20 @@ export default class SurveyPlugin extends FlexPlugin {
    * @param manager { Flex.Manager }
    */
   init(flex: typeof Flex, manager: Flex.Manager) {
-    flex.TaskInfoPanel.Content.replace(<SurveyTask key="SurveyTask-component" />, { if: ({ task }) => task.channelType == 'survey' });
+    // replace the content of Info tab
+    flex.TaskCanvasTabs.Content.add(<SurveyTask key="SurveyTask-component" label="survey" uniqueName="survey" />, {
+      if: ({ task }) => !!task.attributes.questions,
+      sortOrder: -1,
+    });
+
+    // remove info tab
+    flex.TaskCanvasTabs.Content.remove('info');
+
+    // delete first tab, to show directly the survey tab
+    flex.TaskCanvasTabs.Content.remove('incoming', { if: ({ task }) => task.channelType == 'survey' });
 
     this.addSurveyChannel(flex);
     this.listenAfterAcceptTask(flex);
-
-    // delete first tab, to show directly the survey tab
-    flex.TaskCanvasTabs.Content.remove('incoming');
   }
 
   addSurveyChannel(flex: typeof Flex) {
