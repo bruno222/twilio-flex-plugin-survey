@@ -16,7 +16,7 @@ const run = async () => {
       { stars: 4, title: 'Pricing' },
     ],
     overallStars: 2,
-    details: "I liked but but... the experience of buying was just way too fast... Didn't have the time to enjoy the journey.",
+    details: `I had issues on uploading documents larger than 50 mb.`,
   };
 
   const task = await client.taskrouter.workspaces(workspaceSid).tasks.create({
