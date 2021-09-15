@@ -23,6 +23,9 @@ export default class SurveyPlugin extends FlexPlugin {
 
     this.addSurveyChannel(flex);
     this.listenAfterAcceptTask(flex);
+
+    // delete first tab, to show directly the survey tab
+    flex.TaskCanvasTabs.Content.remove('incoming');
   }
 
   addSurveyChannel(flex: typeof Flex) {
