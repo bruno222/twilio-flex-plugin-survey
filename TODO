@@ -1,6 +1,6 @@
 - [x] create a single exemple on how to create a task via SDK
 - [x] create channel survey with beautiful icons
-- [] create HTML for the SurveyTask component
+- [x] create HTML for the SurveyTask component
 - [x] create own flow that takes a while to expires....
 - [x] on accept, do an outbound call.
 - [x] show the journey name in the task header (e.g. "new car policy"), so agent knows before accepting the task what is this survey about.
