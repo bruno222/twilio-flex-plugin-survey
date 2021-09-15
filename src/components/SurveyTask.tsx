@@ -3,7 +3,6 @@ import React from 'react';
 // It is recommended to keep components stateless and use redux for managing states
 export const SurveyTask = (props: any) => {
   const attr = props.task.attributes;
-  console.log('@@@props', props);
 
   function fillStars(count: number) {
     let ret = '';
@@ -40,7 +39,6 @@ export const SurveyTask = (props: any) => {
       <div style={style.journey}>{attr.journey}</div>
       <div style={style.questions}>
         {attr.questions.map((q: any) => {
-          console.log('aaa', q);
           return (
             <p>
               {fillStars(q.stars)} {q.title}
