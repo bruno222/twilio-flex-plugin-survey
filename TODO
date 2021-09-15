@@ -4,4 +4,4 @@
 - [x] create own flow that takes a while to expires....
 - [x] on accept, do an outbound call.
 - [x] show the journey name in the task header (e.g. "new car policy"), so agent knows before accepting the task what is this survey about.
-- [] create a lovely readme
+- [x] create a short readme
