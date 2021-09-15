@@ -8,6 +8,7 @@ const run = async () => {
   const workflowSid = 'WW991ba5195ae361494ea771ad06486061'; // 1. New Workflow > 2. TaskReservation timeout: 600 > 3. Default task queue: Everyone
 
   const attributes = {
+    customerPhone: '+49123',
     name: 'Bob Coletti',
     journey: 'new car policy',
     questions: [

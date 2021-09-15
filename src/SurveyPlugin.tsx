@@ -2,6 +2,7 @@ import React from 'react';
 import * as Flex from '@twilio/flex-ui';
 import { FlexPlugin } from 'flex-plugin';
 import { SurveyTask } from './components/SurveyTask';
+import { Actions } from '@twilio/flex-ui-core';
 
 const PLUGIN_NAME = 'SurveyPlugin';
 
@@ -21,6 +22,7 @@ export default class SurveyPlugin extends FlexPlugin {
     flex.TaskInfoPanel.Content.replace(<SurveyTask key="SurveyTask-component" />, { if: ({ task }) => task.channelType == 'survey' });
 
     this.addSurveyChannel(flex);
+    this.listenAfterAcceptTask(flex);
   }
 
   addSurveyChannel(flex: typeof Flex) {
@@ -52,5 +54,32 @@ export default class SurveyPlugin extends FlexPlugin {
     newChannel.templates!.TaskListItem!.secondLine = (task) => task.attributes.journey;
 
     flex.TaskChannels.register(newChannel);
+  }
+
+  listenAfterAcceptTask(flex: typeof Flex) {
+    flex.Actions.addListener('afterAcceptTask', async (payload) => {
+      console.log('@@@ SurveyPlugin - beforeAcceptTask', payload);
+
+      const { channelType, attributes, taskSid, sid } = payload.task;
+
+      if (channelType !== 'survey') {
+        console.log('@@@ SurveyPlugin - ignoring this channelType', channelType);
+        return;
+      }
+
+      // removes this current custom Survey task from the panel
+      await flex.Actions.invokeAction('CompleteTask', { sid });
+
+      // start a new task forr the outbound call
+      await flex.Actions.invokeAction('StartOutboundCall', {
+        destination: attributes.customerPhone,
+        // callerId: '+49....',
+        // queueSid: 'WQ.....',
+        taskAttributes: {
+          ...attributes,
+          conversation_id: taskSid, // https://www.twilio.com/docs/flex/developer/insights/enhance-integration#link-tasks-to-a-conversation
+        },
+      });
+    });
   }
 }
